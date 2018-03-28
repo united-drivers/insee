@@ -17,3 +17,7 @@ func ParseSiren(input string) *Siren {
 func (s *Siren) Validate() bool {
 	return len(s.number) == 9 && ValidateLuhn(s.number)
 }
+
+func (s *Siren) Number() string {
+	return s.number
+}
