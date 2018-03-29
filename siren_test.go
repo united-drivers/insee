@@ -14,3 +14,10 @@ func ExampleSiren_Validate() {
 	)
 	// Output: false false true false false false false
 }
+
+func ExampleSiren_VATNumber() {
+	fmt.Println(
+		ParseSiren("404833048").VAT("FR").Number(),
+	)
+	// Output: FR83404833048
+}

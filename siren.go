@@ -1,5 +1,7 @@
 package insee
 
+import "strconv"
+
 // INSEE codes
 // https://en.wikipedia.org/wiki/INSEE_code
 // https://fr.wikipedia.org/wiki/Code_Insee
@@ -20,4 +22,16 @@ func (s *Siren) Validate() bool {
 
 func (s *Siren) Number() string {
 	return s.number
+}
+
+func (s *Siren) VATKey() string {
+	number, err := strconv.Atoi(s.number)
+	if err != nil {
+		return ""
+	}
+	return strconv.Itoa((12 + 3*number%97) % 97)
+}
+
+func (s *Siren) VAT(countryPrefix string) *VAT {
+	return ParseVAT(countryPrefix + s.VATKey() + s.number)
 }
